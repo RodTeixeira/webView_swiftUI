@@ -55,8 +55,7 @@ struct ContentView: View {
                     
                 }
                 
-            }
-            .navigationBarTitle("Open site", displayMode: .large)
+            }.navigationBarTitle("Open site", displayMode: .large)
         }
     }
 }
