@@ -5,7 +5,7 @@ struct PresentWebView: View {
     
     var url: String
     
-    @State private var isLoading = false
+    @State private var isLoading = true
     
     var body: some View {
         NavigationView {
@@ -13,11 +13,7 @@ struct PresentWebView: View {
                 WebView(url: url, isLoading: $isLoading)
                     .overlay(
                         Group {
-                            if isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                                    .scaleEffect(4)
-                            }
+                            isLoading ? DynamicLoader() : nil
                         }
                     )
             }
@@ -53,7 +49,6 @@ struct WebView: UIViewRepresentable {
         
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
             webView.isHidden =  true
-            parent.isLoading = true
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -66,5 +61,3 @@ struct WebView: UIViewRepresentable {
         Coordinator(self)
     }
 }
-
-
